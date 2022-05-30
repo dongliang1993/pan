@@ -11,8 +11,8 @@
   ],
   "keywords": [],
   "publishConfig": {
-    "registry": "https://registry-cnpm.lilithgame.com"
-  },
+		"registry": "https://registry-cnpm.lilithgame.com"
+	},
   "author": "",
   "license": "ISC",
   "dependencies": {
