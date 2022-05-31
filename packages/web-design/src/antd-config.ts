@@ -5,6 +5,7 @@ export default {
     "text-color-secondary": "#606266",
     "disabled-color": "#BFBFBF",
     "border-radius-base": "8px",
+    "checkbox-border-radius": "4px",
   },
   navTheme: "light",
 };
