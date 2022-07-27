@@ -9,7 +9,7 @@
   "bin": {
     "pan": "bin/pan.js"
   },
-  "maintainers": ["dongliang"],
+  "maintainers": ["liang.dong"],
   "scripts": {
     "build": "pnpm clean && tsc --project tsconfig.json  && pnpm copy-files",
     "build:deps": "umi-scripts bundleDeps",
