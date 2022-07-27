@@ -1,20 +1,21 @@
 import { join, parse } from "path";
 import { generateFile, prompts, randomColor } from "@lilith-plat/utils";
 
-import { TEMPLATES_DIR } from "../../constants";
-import { promptsExitWhenCancel } from "../../utils";
+import { TEMPLATES_DIR } from "../../../constants";
+import { promptsExitWhenCancel } from "../../../utils";
 
-import { IApi } from "../../types";
+import { IApi } from "../../../types";
 
 const INDEX_TPL_PATH = join(TEMPLATES_DIR, "generate/page/index.tsx.tpl");
 const LEES_TPL_PATH = join(TEMPLATES_DIR, "generate/page/index.less.tpl");
 const DEFAULT_PAGE_NAME = "unTitledPage";
+console.log(TEMPLATES_DIR, "TEMPLATES_DIR");
 
 export default (api: IApi) => {
   api.registerGenerator({
     key: "page",
     name: "Create Pages",
-    description: "Create a umi page by page name",
+    description: "Create a page by page name",
     fn: async (options) => {
       return new PageGenerator({
         generateFile: generateFile,

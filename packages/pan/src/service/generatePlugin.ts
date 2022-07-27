@@ -1,7 +1,7 @@
 import { prompts, generateFile, updatePackageJSON } from "@lilith-plat/utils";
 import { PluginAPI } from "./pluginAPI";
 
-import { Generator } from "../types";
+import { Generator as IGenerator } from "../types";
 
 export default (api: PluginAPI) => {
   api.registerCommand({
@@ -11,7 +11,7 @@ export default (api: PluginAPI) => {
     async fn({ args }) {
       const [type] = args._;
 
-      const runGenerator = async (generator: Generator) => {
+      const runGenerator = async (generator: IGenerator) => {
         await generator?.fn({
           args,
           generateFile,
@@ -20,7 +20,7 @@ export default (api: PluginAPI) => {
       };
 
       if (type) {
-        const generator = api.service.generators[type] as Generator;
+        const generator = api.service.generators[type] as IGenerator;
         if (!generator) {
           throw new Error(`Generator ${type} not found.`);
         }
@@ -31,7 +31,7 @@ export default (api: PluginAPI) => {
         ) => {
           const questions = [] as { title: string; value: string }[];
           for (const key of Object.keys(generators)) {
-            const g = generators[key] as Generator;
+            const g = generators[key] as IGenerator;
 
             questions.push({
               title: `${g.name} -- ${g.description}` || "",

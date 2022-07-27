@@ -4,16 +4,17 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "compiled"
+    "dist"
   ],
   "bin": {
     "pan": "bin/pan.js"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "pnpm clean && tsc --project tsconfig.json  && pnpm copy-files",
     "build:deps": "umi-scripts bundleDeps",
-    "dev": "tsc dev"
+    "dev": "tsc dev",
+    "clean": "rm -rf ./dist",
+    "copy-files": "cp -ri ./templates/ ./dist/templates"
   },
   "devDependencies": {
     "@hapi/joi": "17.1.1",
@@ -56,5 +57,8 @@
   "dependencies": {
     "@lilith-plat/utils": "workspace:^0.0.1",
     "pino": "^8.3.0"
-  }
+  },
+  "publishConfig": {
+		"registry": "https://registry-cnpm.lilithgame.com"
+	}
 }

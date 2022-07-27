@@ -1,17 +1,15 @@
 import assert from "assert";
 import { Service } from "./service";
-import { Command, IOpts as ICommandOpts } from "./command";
-import { Generator, Plugin } from "../types";
+import { Command, CommandOpts } from "./command";
+import { Generator } from "../types";
 import { makeArray } from "../utils";
 
 export class PluginAPI {
   service: Service;
-  plugin: Plugin;
   generators: Record<string, Generator>;
 
-  constructor(opts: { service: Service; plugin: Plugin }) {
+  constructor(opts: { service: Service }) {
     this.service = opts.service;
-    this.plugin = opts.plugin;
     this.generators = {};
   }
 
@@ -30,7 +28,7 @@ export class PluginAPI {
    * 注册命令行指令，比如 generate
    * @param opts
    */
-  registerCommand(opts: ICommandOpts & { alias?: string | string[] }) {
+  registerCommand(opts: CommandOpts & { alias?: string | string[] }) {
     const { alias, name } = opts;
     delete opts.alias;
 

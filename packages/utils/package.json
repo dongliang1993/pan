@@ -23,6 +23,7 @@
     "@types/mustache": "4.1.2",
     "@types/prettier": "^2.6.3",
     "@types/prompts": "^2.0.14",
+    "@types/resolve": "^1.20.2",
     "@types/rimraf": "3.0.2",
     "@types/semver": "7.3.9",
     "@types/yargs-parser": "^21.0.0",

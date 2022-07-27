@@ -1,24 +1,30 @@
 import assert from "assert";
 import { PluginAPI } from "./PluginAPI";
-import { Command } from "./command";
+import { Plugin } from "./plugin";
 
-import generatePlugin from "./generatePlugin";
+import type { Command } from "./command";
+import { Generator as IGenerator } from "../types";
 
-import page from "../commands/generators/page";
-
-import { Plugin } from "../types";
-
-interface IOpts {
+interface ServiceOpts {
   cwd: string;
+  presets?: string[];
+  plugins?: string[];
 }
 
 export class Service {
+  private opts: ServiceOpts;
   cwd: string;
-  opts: IOpts;
   commands: Record<string, Command> = {};
-  generators: Record<string, Generator> = {};
+  generators: Record<string, IGenerator> = {};
 
-  constructor(opts: IOpts) {
+  constructor(opts: ServiceOpts) {
+    // 初始化内部的 plugin 和 presets
+    opts.plugins = [
+      require.resolve("./generatePlugin"),
+      ...(opts?.plugins || []),
+    ];
+    opts.presets = [require.resolve("../preset"), ...(opts?.presets || [])];
+
     this.cwd = opts.cwd;
     this.opts = opts;
     this.commands = {};
@@ -28,12 +34,42 @@ export class Service {
   async initPlugin(opts: { plugin: Plugin }) {
     // apply with PluginAPI
     const pluginAPI = new PluginAPI({
-      plugin: opts.plugin,
       service: this,
     });
-    let ret = await opts.plugin(pluginAPI);
 
+    let ret = await opts.plugin.apply?.()(pluginAPI);
+
+    if (ret?.presets) {
+      ret.presets = ret.presets.map(
+        (preset: string) =>
+          new Plugin({
+            path: preset,
+            cwd: this.cwd,
+          })
+      );
+    }
+    if (ret?.plugins) {
+      ret.plugins = ret.plugins.map(
+        (plugin: string) =>
+          new Plugin({
+            path: plugin,
+            cwd: this.cwd,
+          })
+      );
+    }
     return ret || {};
+  }
+
+  async initPreset(opts: {
+    preset: Plugin;
+    presets: Plugin[];
+    plugins: Plugin[];
+  }) {
+    const { presets, plugins } = await this.initPlugin({
+      plugin: opts.preset,
+    });
+    opts.presets.unshift(...(presets || []));
+    opts.plugins.push(...(plugins || []));
   }
 
   async run(opts: { name: string; args?: any }) {
@@ -45,8 +81,26 @@ export class Service {
       args._.shift();
     }
 
+    // resolve initial presets and plugins
+    const { plugins, presets } = Plugin.getPluginsAndPresets({
+      cwd: this.cwd,
+      plugins: [...this.opts.plugins!],
+      presets: [...this.opts.presets!],
+    });
+
+    const presetPlugins: Plugin[] = [];
+
+    while (presets.length) {
+      await this.initPreset({
+        preset: presets.shift()!,
+        presets,
+        plugins: presetPlugins,
+      });
+    }
+
+    plugins.unshift(...presetPlugins);
+
     // 注册内置的 plugins
-    const plugins = [generatePlugin, page] as Plugin[];
     while (plugins.length) {
       await this.initPlugin({ plugin: plugins.shift()! });
     }

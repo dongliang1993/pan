@@ -98,6 +98,7 @@ importers:
       '@types/mustache': 4.1.2
       '@types/prettier': ^2.6.3
       '@types/prompts': ^2.0.14
+      '@types/resolve': ^1.20.2
       '@types/rimraf': 3.0.2
       '@types/semver': 7.3.9
       '@types/yargs-parser': ^21.0.0
@@ -139,6 +140,7 @@ importers:
       '@types/mustache': 4.1.2
       '@types/prettier': 2.6.3
       '@types/prompts': 2.0.14
+      '@types/resolve': 1.20.2
       '@types/rimraf': 3.0.2
       '@types/semver': 7.3.9
       '@types/yargs-parser': 21.0.0
@@ -289,6 +291,10 @@ packages:
     resolution: {integrity: sha512-HZBd99fKxRWpYCErtm2/yxUZv6/PBI9J7N4TNFffl5JbrYMHBwF25DjQGTW3b3jmXq+9P6/8fCIb2ee57BFfYA==}
     dependencies:
       '@types/node': 17.0.36
+    dev: true
+
+  /@types/resolve/1.20.2:
+    resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
     dev: true
 
   /@types/rimraf/3.0.2:
