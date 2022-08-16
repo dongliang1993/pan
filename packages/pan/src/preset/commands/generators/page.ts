@@ -9,7 +9,6 @@ import { IApi } from "../../../types";
 const INDEX_TPL_PATH = join(TEMPLATES_DIR, "generate/page/index.tsx.tpl");
 const LEES_TPL_PATH = join(TEMPLATES_DIR, "generate/page/index.less.tpl");
 const DEFAULT_PAGE_NAME = "unTitledPage";
-console.log(TEMPLATES_DIR, "TEMPLATES_DIR");
 
 export default (api: IApi) => {
   api.registerGenerator({

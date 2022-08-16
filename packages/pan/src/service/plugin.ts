@@ -15,6 +15,8 @@ export class Plugin {
   constructor(opts: PluginOpts) {
     this.path = winPath(opts.path);
     this.cwd = opts.cwd;
+    console.log(this.cwd);
+
     assert(existsSync(this.path), `Invalid ${this.path}, it's not exists.`);
 
     this.apply = () => {

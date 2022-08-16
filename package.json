@@ -10,5 +10,9 @@
   "license": "ISC",
   "publishConfig": {
 		"registry": "https://registry-cnpm.lilithgame.com"
-	}
+	},
+  "private": true,
+  "workspaces": {
+    "packages": ["packages/*"]
+  }
 }

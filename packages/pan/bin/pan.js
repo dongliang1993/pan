@@ -1,4 +1,6 @@
-require('../dist/cli/cli')
+#!/usr/bin/env node
+
+require('../dist/cli/cli.js')
   .run()
   .catch((e) => {
     console.error(e);

@@ -5,6 +5,7 @@
     "rootDir": "./src",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "sourceMap": true
   },
   "include": ["src"]
 }

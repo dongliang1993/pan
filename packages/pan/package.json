@@ -1,6 +1,6 @@
 {
   "name": "@lilith-plat/pan",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -9,7 +9,6 @@
   "bin": {
     "pan": "bin/pan.js"
   },
-  "maintainers": ["liang.dong"],
   "scripts": {
     "build": "pnpm clean && tsc --project tsconfig.json  && pnpm copy-files",
     "build:deps": "umi-scripts bundleDeps",
@@ -17,6 +16,11 @@
     "clean": "rm -rf ./dist",
     "copy-files": "cp -ri ./templates/ ./dist/templates"
   },
+  "maintainers": [
+    {
+      "name": "liang.dong"
+    }
+  ],
   "devDependencies": {
     "@hapi/joi": "17.1.1",
     "@types/color": "3.0.3",
@@ -29,7 +33,11 @@
     "@types/prettier": "^2.6.3",
     "@types/prompts": "^2.0.14",
     "@types/rimraf": "3.0.2",
-    "@types/semver": "7.3.9",
+    "@types/semver": "7.3.9"
+  },
+  "dependencies": {
+    "@lilith-plat/utils": "^0.0.3",
+    "pino": "^8.3.0",
     "address": "1.1.2",
     "axios": "0.27.2",
     "chalk": "5.0.1",
@@ -53,13 +61,11 @@
     "rimraf": "3.0.2",
     "semver": "7.3.6",
     "strip-ansi": "7.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4",
     "yargs-parser": "21.0.1"
   },
-  "dependencies": {
-    "@lilith-plat/utils": "workspace:^0.0.1",
-    "pino": "^8.3.0"
-  },
   "publishConfig": {
-		"registry": "https://registry-cnpm.lilithgame.com"
-	}
+    "registry": "https://registry-cnpm.lilithgame.com"
+  }
 }
