@@ -1,6 +1,6 @@
 {
   "name": "@lilith-plat/web-design-test",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -51,7 +51,7 @@
     ]
   },
   "dependencies": {
-    "@lilith-plat/utils": "^0.0.5",
+    "@lilith-plat/utils": "^1.0.0",
     "babel-plugin-import": "^1.13.5",
     "react": "^18.0.0"
   },

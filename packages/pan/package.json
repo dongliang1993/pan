@@ -1,6 +1,6 @@
 {
   "name": "@lilith-plat/pan",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "@lilith-plat/utils": "^0.0.3",
-    "pino": "^8.3.0",
     "address": "1.1.2",
     "axios": "0.27.2",
     "chalk": "5.0.1",
@@ -52,6 +51,7 @@
     "import-lazy": "4.0.0",
     "lodash": "4.17.21",
     "mustache": "4.2.0",
+    "pino": "^8.3.0",
     "pirates": "4.0.5",
     "pkg-up": "4.0.0",
     "portfinder": "1.0.28",

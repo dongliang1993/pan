@@ -1,6 +1,6 @@
 {
   "name": "@lilith-plat/utils",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -34,12 +34,11 @@
   },
   "dependencies": {
     "@hapi/joi": "17.1.1",
-    "color": "4.2.3",
-    "pino": "^8.3.0",
     "address": "1.1.2",
     "axios": "0.27.2",
     "chalk": "4.1.2",
     "cheerio": "1.0.0-rc.10",
+    "color": "4.2.3",
     "cross-spawn": "7.0.3",
     "debug": "4.3.4",
     "deepmerge": "4.2.2",
@@ -49,6 +48,7 @@
     "import-lazy": "4.0.0",
     "lodash": "4.17.21",
     "mustache": "4.2.0",
+    "pino": "^8.3.0",
     "pirates": "4.0.5",
     "pkg-up": "4.0.0",
     "portfinder": "1.0.28",
