@@ -2,10 +2,5 @@
   "packages": [
     "packages/web-design"
   ],
-  "command": {
-    "bootstrap": {
-      "hoist": true
-    }
-  },
   "version": "independent"
 }
