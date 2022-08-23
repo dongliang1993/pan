@@ -3,6 +3,6 @@
 
 # production
 **/dist
-
+lerna.json
 yarn.lock
 package-lock.json
