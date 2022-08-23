@@ -1,26 +1,19 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
-    "module": "commonjs",
-    "target": "ES5",
-    "lib": ["esnext", "dom"],
-    "baseUrl": ".",
-    "jsx": "react",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "experimentalDecorators": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "types": ["jest", "node"],
     "strict": true,
     "skipLibCheck": true,
-    "declaration": true
+    "declaration": true,
+    "declarationDir": "lib",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-  ],
-  "include": ["src/*.json", "src/*.ts"]
+  "include": ["src", "typings.d.ts"],
+  "exclude": ["node_modules"]
 }

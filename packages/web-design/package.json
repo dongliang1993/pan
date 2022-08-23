@@ -1,24 +1,81 @@
 {
-  "name": "@lilith-plat/web-design",
-  "version": "1.0.3",
-  "description": "",
-  "main": "dist/index.js",
+  "name": "@lilith-plat/web-design-test",
+  "version": "1.0.4",
   "scripts": {
-    "build": "tsc --build tsconfig.json"
+    "start": "dumi dev",
+    "docs:build": "dumi build",
+    "docs:deploy": "gh-pages -d docs-dist",
+    "build:types": "tsc -p tsconfig.build.json && cpr lib es",
+    "clean": "rimraf lib es dist",
+    "preview:site": "npm run docs:build && serve doc-site",
+    "deploy": "npm run docs:build && npm run docs:deploy",
+    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "prepublishOnly": "npm run build",
+    "compile-antd": "rimraf ./compiled && node ./scripts/compileAntd",
+    "build": "yarn clean && father build && cpr src/antd-config.js dist/antd-config.js",
+    "merge": "node ./scripts/merge"
   },
-  "files": [
-    "dist"
+  "sideEffects": [
+    "dist/*",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "src/**/style/*",
+    "./src/**/style/**",
+    "*.less"
   ],
-  "keywords": [],
-  "publishConfig": {
-		"registry": "https://registry-cnpm.lilithgame.com"
-	},
-  "author": "",
-  "license": "ISC",
+  "maintainers": [
+    {
+      "name": "liang.dong"
+    }
+  ],
+  "files": [
+    "dist",
+    "es",
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "lib/index.d.ts",
+  "unpkg": "dist/antd.min.js",
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
   "dependencies": {
-    "typescript": "^4.7.2"
+    "@lilith-plat/utils": "^0.0.5",
+    "babel-plugin-import": "^1.13.5",
+    "react": "^18.0.0"
   },
   "devDependencies": {
-    "@types/node": "^17.0.36"
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^13.0.0",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^18.7.5",
+    "@umijs/fabric": "^2.8.1",
+    "@umijs/test": "^3.0.5",
+    "antd": "^4.22.5",
+    "babel-plugin-import": "^1.13.5",
+    "cpr": "^3.0.1",
+    "dumi": "^1.1.0",
+    "fast-glob": "^3.2.11",
+    "father": "^4.0.0-rc.2",
+    "fs-extra": "^10.1.0",
+    "gh-pages": "^3.0.0",
+    "glob": "^8.0.3",
+    "lint-staged": "^10.0.7",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "yorkie": "^2.0.0"
   }
 }

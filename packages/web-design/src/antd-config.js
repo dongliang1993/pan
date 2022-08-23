@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   theme: {
     "primary-color": "#5D84E0",
     "text-color": "#303133",
