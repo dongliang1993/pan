@@ -2,7 +2,7 @@
 ## Hello web-design!
 
 ---
-title: Happy UI
+title: UI
 
 hero:
   title: Happy UI
