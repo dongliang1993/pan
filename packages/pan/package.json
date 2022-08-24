@@ -21,20 +21,6 @@
       "name": "liang.dong"
     }
   ],
-  "devDependencies": {
-    "@hapi/joi": "17.1.1",
-    "@types/color": "3.0.3",
-    "@types/cross-spawn": "6.0.2",
-    "@types/debug": "4.1.7",
-    "@types/fs-extra": "^9.0.13",
-    "@types/hapi__joi": "17.1.8",
-    "@types/lodash": "4.14.182",
-    "@types/mustache": "4.1.2",
-    "@types/prettier": "^2.6.3",
-    "@types/prompts": "^2.0.14",
-    "@types/rimraf": "3.0.2",
-    "@types/semver": "7.3.9"
-  },
   "dependencies": {
     "@lilith-plat/utils": "^0.0.3",
     "address": "1.1.2",
