@@ -6,4 +6,5 @@
 yarn.lock
 package-lock.json
 lerna-debug.log
+lerna.json
 npm-debug.log
