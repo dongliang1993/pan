@@ -5,6 +5,5 @@
 **/dist
 yarn.lock
 package-lock.json
-lerna.json
 lerna-debug.log
 npm-debug.log

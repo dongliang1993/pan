@@ -19,13 +19,34 @@
     ]
   },
   "dependencies": {
-    "lerna": "^5.4.3"
+    "@lilith-plat/web-design-test": "file:packages/web-design"
   },
   "name": "data-fe",
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^13.0.0",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^18.7.5",
+    "@umijs/fabric": "^2.8.1",
+    "@umijs/test": "^3.0.5",
+    "antd": "^4.22.5",
+    "babel-plugin-import": "^1.13.5",
+    "cpr": "^3.0.1",
+    "dumi": "^1.1.0",
+    "fast-glob": "^3.2.11",
+    "father": "^4.0.0-rc.2",
     "fs-extra": "^10.1.0",
+    "gh-pages": "^3.0.0",
+    "glob": "^8.0.3",
     "globby": "11.0.4",
     "handlebars": "^4.7.7",
-    "inquirer": "8.2.3"
+    "inquirer": "8.2.3",
+    "lint-staged": "^10.0.7",
+    "np": "^7.6.2",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "yorkie": "^2.0.0"
   }
 }

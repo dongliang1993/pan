@@ -1,4 +1,3 @@
-// scripts/publish.js
 const globby = require('globby')
 const inquirer = require('inquirer')
 const fs = require('fs-extra')
@@ -36,10 +35,10 @@ const publish = async () => {
   const publishPackages = await choosePackage(packages)
   if (publishPackages.packages.length !== 0) {
     reWriteLerna(publishPackages)
-    execa.commandSync('lerna publish', {
-      stdio: 'inherit',
-      cwd,
-    })
+    // execa.commandSync('lerna publish', {
+    //   stdio: 'inherit',
+    //   cwd,
+    // })
   } else {
     console.log("没有选择包")
   }
