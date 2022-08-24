@@ -35,10 +35,12 @@ const publish = async () => {
   const publishPackages = await choosePackage(packages)
   if (publishPackages.packages.length !== 0) {
     reWriteLerna(publishPackages)
-    execa.commandSync('lerna publish', {
+    const a = execa.commandSync('lerna publish', {
       stdio: 'inherit',
       cwd,
     })
+
+    console.log(a, 'a');
   } else {
     console.log("没有选择包")
   }
