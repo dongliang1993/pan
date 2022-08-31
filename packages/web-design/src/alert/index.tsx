@@ -1,5 +1,4 @@
 import { PropsWithChildren } from 'react';
-
 import { getPrefixCls } from '../_utils';
 export interface AlertProps {
   /**

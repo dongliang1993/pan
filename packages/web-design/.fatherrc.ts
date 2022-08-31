@@ -1,3 +1,5 @@
+import pkg from './package.json';
+
 export default {
   // more father 4 config: https://github.com/umijs/father-next/blob/master/docs/config.md
   esm: {
@@ -29,6 +31,7 @@ export default {
     ignores: ['src/**/demo/*.{ts,tsx}'],
   },
   umd: {
+    name: pkg.name,
     output: 'dist',
   },
   extraBabelPresets: ['@babel/typescript', '@babel/react'],
