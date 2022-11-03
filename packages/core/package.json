@@ -1,0 +1,29 @@
+{
+  "name": "@pan/core",
+  "main": "dist/index.js",
+  "version": "1.1.0",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "compiled"
+  ],
+  "scripts": {
+    "build": "father build",
+    "build:deps": "umi-scripts bundleDeps",
+    "dev": "father dev",
+    "test": "umi-scripts jest-turbo"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+  },
+  "maintainers": [
+    {
+      "name": "liang.dong"
+    }
+  ],
+  "compiledConfig": {
+  }
+}

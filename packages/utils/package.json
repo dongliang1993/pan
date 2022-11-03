@@ -1,5 +1,5 @@
 {
-  "name": "@lilith-plat/utils",
+  "name": "@pan/utils",
   "version": "1.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
     "compiled"
   ],
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "father build",
     "build:deps": "umi-scripts bundleDeps",
     "dev": "tsc dev"
   },
@@ -37,7 +37,6 @@
     "pirates": "4.0.5",
     "pkg-up": "4.0.0",
     "portfinder": "1.0.28",
-    "prettier": "2.6.2",
     "prompts": "2.4.2",
     "resolve": "1.22.0",
     "rimraf": "3.0.2",

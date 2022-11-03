@@ -6,10 +6,16 @@
   "configurations": [
     {
       "type": "node",
-      "request": "launch",
+      // "request": "lanch" ,
       "name": "Launch Program",
-      "runtimeExecutable": "node",
-      "cwd": "${workspaceRoot}",
+      // "console": "integratedTerminal",
+      // "resolveSourceMapLocations":[
+      //   "${workspaceFolder}/**",
+      // ],
+      // "runtimeExecutable": "npm",
+      // "program": "${workspaceFolder}/packages/pan/bin/pan.js",
+      // "port": 8888,
+      // "cwd": "${workspaceRoot}",
       "runtimeArgs": [
         "--nolazy",
         "-r",
@@ -18,11 +24,11 @@
       "args": [
         "${workspaceRoot}/packages/pan/bin/pan.js",
         "g",
-        "page"
+        "eslint"
       ],
-      "env": {
-        "TS_NODE_PROJECT": "${workspaceFolder}/packages/pan/tsconfig.json"
-      }
+      // "env": {
+      //   "TS_NODE_PROJECT": "${workspaceFolder}/packages/pan/tsconfig.json"
+      // }
     }
   ]
 }

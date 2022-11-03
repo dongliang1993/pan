@@ -1,18 +1,18 @@
-import { writeFileSync } from "fs";
-import { resolve } from "path";
-import deepmerge from "deepmerge";
+import { writeFileSync } from 'fs'
+import { resolve } from 'path'
+import deepmerge from 'deepmerge'
 // import prettier from "prettier";
 
 function updatePackageJSON({
   opts,
   cwd = process.cwd(),
 }: {
-  opts: object;
-  cwd?: string;
+  opts: object
+  cwd?: string
 }) {
-  const packageJsonPath = resolve(cwd, "package.json");
-  const pkg = require(packageJsonPath);
-  const projectPkg = deepmerge(pkg, opts) as object;
+  const packageJsonPath = resolve(cwd, 'package.json')
+  const pkg = require(packageJsonPath)
+  const projectPkg = deepmerge(pkg, opts) as object
   // writeFileSync(
   //   packageJsonPath
   //   // 删除一个包之后 json会多了一些空行。sortPackage 可以删除掉并且排序
@@ -23,4 +23,4 @@ function updatePackageJSON({
   // );
 }
 
-export default updatePackageJSON;
+export default updatePackageJSON

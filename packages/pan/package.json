@@ -1,5 +1,5 @@
 {
-  "name": "@lilith-plat/pan",
+  "name": "pan",
   "version": "1.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,9 +10,10 @@
     "pan": "bin/pan.js"
   },
   "scripts": {
-    "build": "pnpm clean && tsc --project tsconfig.json  && pnpm copy-files",
+    "build": "father build",
     "build:deps": "umi-scripts bundleDeps",
     "dev": "tsc dev",
+    "debug": "ts-node ./src/cli.ts",
     "clean": "rm -rf ./dist",
     "copy-files": "cp -ri ./templates/ ./dist/templates"
   },
@@ -22,36 +23,8 @@
     }
   ],
   "dependencies": {
-    "@lilith-plat/utils": "^0.0.3",
-    "address": "1.1.2",
-    "axios": "0.27.2",
-    "chalk": "5.0.1",
-    "cheerio": "1.0.0-rc.10",
-    "color": "4.2.3",
-    "cross-spawn": "7.0.3",
-    "debug": "4.3.4",
-    "deepmerge": "4.2.2",
-    "execa": "6.1.0",
-    "fs-extra": "10.0.1",
-    "glob": "8.0.1",
-    "import-lazy": "4.0.0",
-    "lodash": "4.17.21",
-    "mustache": "4.2.0",
-    "pino": "^8.3.0",
-    "pirates": "4.0.5",
-    "pkg-up": "4.0.0",
-    "portfinder": "1.0.28",
-    "prettier": "2.6.2",
-    "prompts": "2.4.2",
-    "resolve": "1.22.0",
-    "rimraf": "3.0.2",
-    "semver": "7.3.6",
-    "strip-ansi": "7.0.1",
+    "@pan/utils": "^0.0.3",
     "ts-node": "^10.9.1",
-    "typescript": "^4.7.4",
-    "yargs-parser": "21.0.1"
-  },
-  "publishConfig": {
-    "registry": "https://registry-cnpm.lilithgame.com"
+    "typescript": "4.7.4"
   }
 }
