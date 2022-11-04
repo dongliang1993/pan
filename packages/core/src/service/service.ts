@@ -10,6 +10,9 @@ import { Command } from './command'
 import { Env, PluginType } from '../types'
 
 interface ServiceOpts {
+  /**
+   * cli 命令执行的文件夹地址
+   */
   cwd: string
   env: Env
   presets?: string[]
@@ -51,6 +54,8 @@ export class Service {
 
     let ret = await opts.plugin.apply?.()(pluginAPI)
 
+    // preset 也是一种 plugin ，只不过它内部返回了形如 {presets: [], plugins: []}
+    // 这样的数据结构
     if (ret?.presets) {
       ret.presets = ret.presets.map(
         (preset: string) =>
@@ -91,8 +96,8 @@ export class Service {
     let pkg: Record<string, string | Record<string, any>> = {}
     let pkgPath: string = ''
     try {
-      pkg = require(join(this.cwd, 'package.json'))
       pkgPath = join(this.cwd, 'package.json')
+      pkg = require(pkgPath)
     } catch (_e) {}
     this.pkg = pkg
     this.pkgPath = pkgPath || join(this.cwd, 'package.json')
@@ -101,13 +106,13 @@ export class Service {
   async run(opts: { name: string; args?: any }) {
     const { name, args = {} } = opts
     args._ = args._ || []
-    // 先处理一下命令行的参数
-    // shift the command itself
+    // args._[0] 一般就是 name
+    // 所以这里先处理一下命令行的参数
     if (args._[0] === name) {
       args._.shift()
     }
 
-    // get pkg from package.json
+    // 获取 package.json 相关信息
     this.initPkgInfo()
 
     // 加载内部和传入的 presets and plugins

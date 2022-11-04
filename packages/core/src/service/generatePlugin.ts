@@ -8,16 +8,17 @@ import { PluginAPI } from './pluginAPI'
 
 import { Generator as IGenerator } from './generator'
 
-// 内置的 plugin
+// 内置的 generate plugin
 // 用来注册微生成器命令
+// 比如 pan generate xxx
 export default (api: PluginAPI) => {
   api.registerCommand({
     name: 'generate',
     alias: 'g',
     description: 'generate code snippets quickly',
     async fn({ args }) {
-      // type 是 -generate xxx  yyy 第一个参数
-      // 比如 pan g page 中的 page
+      // type 是 pan generate xxx 的参数
+      // 比如 page
       const [type] = args._
 
       const runGenerator = async (generator: IGenerator) => {
@@ -29,7 +30,7 @@ export default (api: PluginAPI) => {
         })
       }
 
-      // 如果有微生成器的类型
+      // 如果有对应的微生成器
       if (type) {
         const generator = api.service.generators[type] as IGenerator
         if (!generator) {

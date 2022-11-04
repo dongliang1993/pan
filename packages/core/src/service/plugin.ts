@@ -39,7 +39,7 @@ export class Plugin {
   }
 
   /**
-   * 用来找到传入的 plugin
+   * 寻找 plugins 和 presets
    * @param opts
    * @returns
    */
@@ -51,10 +51,7 @@ export class Plugin {
   }) {
     function get(type: 'plugin' | 'preset') {
       const types = `${type}s` as 'plugins' | 'presets'
-      return [
-        // opts
-        ...(opts[types] || []),
-      ].map((path) => {
+      return [...(opts[types] || [])].map((path) => {
         assert(
           typeof path === 'string',
           `Invalid plugin ${path}, it must be string.`
