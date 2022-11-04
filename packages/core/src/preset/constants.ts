@@ -1,3 +1,3 @@
-import { join } from "path";
+import { join } from 'path'
 
-export const TEMPLATES_DIR = join(__dirname, "../templates");
+export const TEMPLATES_DIR = join(__dirname, '../templates')

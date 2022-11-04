@@ -1,4 +1,9 @@
-import { prompts, generateFile, updatePackageJSON } from '@lilith-plat/utils'
+import {
+  prompts,
+  generateFile,
+  installDeps,
+  updatePackageJSON,
+} from '@pan/utils'
 import { PluginAPI } from './pluginAPI'
 
 import { Generator as IGenerator } from './generator'
@@ -11,47 +16,51 @@ export default (api: PluginAPI) => {
     alias: 'g',
     description: 'generate code snippets quickly',
     async fn({ args }) {
+      // type 是 -generate xxx  yyy 第一个参数
+      // 比如 pan g page 中的 page
       const [type] = args._
       console.log(type, 'type')
 
-      // const runGenerator = async (generator: IGenerator) => {
-      //   await generator?.fn({
-      //     args,
-      //     // generateFile,
-      //     updatePackageJSON,
-      //   })
-      // }
+      const runGenerator = async (generator: IGenerator) => {
+        await generator?.fn({
+          args,
+          installDeps,
+          generateFile,
+          updatePackageJSON,
+        })
+      }
 
-      // if (type) {
-      //   const generator = api.service.generators[type] as IGenerator
-      //   if (!generator) {
-      //     throw new Error(`Generator ${type} not found.`)
-      //   }
-      //   await runGenerator(generator)
-      // } else {
-      //   const getEnableGenerators = async (
-      //     generators: typeof api.service.generators
-      //   ) => {
-      //     const questions = [] as { title: string; value: string }[]
-      //     for (const key of Object.keys(generators)) {
-      //       const g = generators[key] as IGenerator
+      // 如果有微生成器的类型
+      if (type) {
+        const generator = api.service.generators[type] as IGenerator
+        if (!generator) {
+          throw new Error(`Generator ${type} not found.`)
+        }
+        await runGenerator(generator)
+      } else {
+        const getEnableGenerators = async (
+          generators: typeof api.service.generators
+        ) => {
+          const questions = [] as { title: string; value: string }[]
+          for (const key of Object.keys(generators)) {
+            const g = generators[key] as IGenerator
 
-      //       questions.push({
-      //         title: `${g.name} -- ${g.description}` || '',
-      //         value: g.key,
-      //       })
-      //     }
-      //     return questions
-      //   }
-      //   const questions = await getEnableGenerators(api.service.generators)
-      //   const { gType } = await prompts({
-      //     type: 'select',
-      //     name: 'gType',
-      //     message: 'Pick generator type',
-      //     choices: questions,
-      //   })
-      //   await runGenerator(api.service.generators[gType])
-      // }
+            questions.push({
+              title: `${g.name} -- ${g.description}` || '',
+              value: g.key,
+            })
+          }
+          return questions
+        }
+        const questions = await getEnableGenerators(api.service.generators)
+        const { gType } = await prompts({
+          type: 'select',
+          name: 'gType',
+          message: 'Pick generator type',
+          choices: questions,
+        })
+        await runGenerator(api.service.generators[gType])
+      }
     },
   })
 }

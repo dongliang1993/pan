@@ -1,31 +1,14 @@
 {
-  "version": "1.0.1",
-  "description": "",
-  "scripts": {
-    "publish:independent": "node scripts/publish.js",
-    "publish": "lerna publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry-cnpm.lilithgame.com"
-  },
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
+  "scripts": {},
+  "engines": {
+    "node": ">=14",
+    "pnpm": ">=7"
   },
-  "dependencies": {
-    "@lilith-plat/pan": "file:packages/pan",
-    "@lilith-plat/utils": "file:packages/utils",
-    "@lilith-plat/core": "file:packages/core"
-  },
-  "name": "data-fe",
   "devDependencies": {
+    "@pan/utils": "workspace:*",
+    "@pan/core": "workspace:*",
+    "pan": "workspace:*",
     "@babel/plugin-transform-runtime": "^7.18.10",
     "@hapi/joi": "17.1.1",
     "@testing-library/jest-dom": "^5.15.1",

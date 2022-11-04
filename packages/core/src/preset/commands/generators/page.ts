@@ -1,16 +1,14 @@
 import { join, parse } from 'path'
-import { generateFile, prompts, randomColor } from '@lilith-plat/utils'
+import { generateFile, prompts, randomColor } from '@pan/utils'
 
-import { TEMPLATES_DIR } from '../../../../../pan/src/constants'
-import { promptsExitWhenCancel } from '../../../../../pan/src/utils'
-
-import { IApi } from '../../../../../pan/src/types'
+import { TEMPLATES_DIR } from '../../constants'
+import { promptsExitWhenCancel } from '../../utils'
 
 const INDEX_TPL_PATH = join(TEMPLATES_DIR, 'generate/page/index.tsx.tpl')
 const LEES_TPL_PATH = join(TEMPLATES_DIR, 'generate/page/index.less.tpl')
 const DEFAULT_PAGE_NAME = 'unTitledPage'
 
-export default (api: IApi) => {
+export default (api: any) => {
   api.registerGenerator({
     key: 'page',
     name: 'Create Pages',

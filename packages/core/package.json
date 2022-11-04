@@ -14,16 +14,12 @@
     "test": "umi-scripts jest-turbo"
   },
   "dependencies": {
-  },
-  "devDependencies": {
-  },
-  "publishConfig": {
+    "@pan/utils": "workspace:^1.1.0"
   },
   "maintainers": [
     {
       "name": "liang.dong"
     }
   ],
-  "compiledConfig": {
-  }
+  "compiledConfig": {}
 }

@@ -4,7 +4,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["*"],
-      "@lilith-plat/utils": ["./packages/utils"],
     }
   }
 }

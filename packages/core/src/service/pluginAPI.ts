@@ -1,19 +1,48 @@
+import { chalk, logger } from '@pan/utils'
 import assert from 'assert'
 import { Service } from './service'
+import { Plugin } from './plugin'
 import { Command, CommandOpts } from './command'
 import { Generator } from './generator'
 import { makeArray } from './utils'
 
+type Logger = typeof logger
+
 /**
- * 供 plugin 使用的 api
+ * 供 plugin 使用的核心 api
  */
 export class PluginAPI {
   service: Service
-  generators: Record<string, Generator>
+  plugin: Plugin
 
-  constructor(opts: { service: Service }) {
+  constructor(opts: { service: Service; plugin: Plugin }) {
     this.service = opts.service
-    this.generators = {}
+    this.plugin = opts.plugin
+
+    // logger
+    const loggerKeys: (keyof Logger)[] = [
+      'wait',
+      'error',
+      'warn',
+      'ready',
+      'info',
+      'event',
+      'debug',
+    ]
+
+    // @ts-ignore
+    this.logger = loggerKeys.reduce<Logger>((memo, key) => {
+      // @ts-ignore
+      memo[key] = (...message: string[]) => {
+        const func = logger[key]
+        if (typeof func !== 'function') {
+          return
+        }
+
+        func(chalk.green(`[plugin:]`), ...message)
+      }
+      return memo
+    }, {} as any)
   }
 
   registerGenerator(opts: Generator) {

@@ -1,4 +1,4 @@
-import { resolve, winPath } from '@lilith-plat/utils'
+import { resolve, winPath } from '@pan/utils'
 import { existsSync } from 'fs'
 import assert from 'assert'
 
@@ -16,6 +16,7 @@ export class Plugin {
   type: PluginType
   path: string
   apply?: Function
+  // id: string;
 
   constructor(opts: PluginOpts) {
     this.type = opts.type

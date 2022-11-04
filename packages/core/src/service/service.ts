@@ -46,6 +46,7 @@ export class Service {
     // apply with PluginAPI
     const pluginAPI = new PluginAPI({
       service: this,
+      plugin: opts.plugin,
     })
 
     let ret = await opts.plugin.apply?.()(pluginAPI)

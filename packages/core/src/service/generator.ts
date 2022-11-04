@@ -1,3 +1,5 @@
+import { generateFile } from '@pan/utils'
+
 export enum GeneratorType {
   generate = 'generate',
   enable = 'enable',
@@ -11,7 +13,7 @@ type IGeneratorOptsWithoutEnableCheck = {
   fn: {
     (opts: {
       args: any
-      // generateFile: typeof generateFile
+      generateFile: typeof generateFile
       updatePackageJSON: {
         (opts: { opts: object; cwd?: string }): void
       }
