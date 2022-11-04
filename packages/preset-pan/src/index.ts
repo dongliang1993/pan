@@ -3,7 +3,7 @@ export default () => {
     plugins: [
       // commands
       require.resolve('./commands/generators/page'),
-      require.resolve('./commands/generators/eslint-generator'),
+      require.resolve('./commands/generators/prettier'),
     ],
   }
 }

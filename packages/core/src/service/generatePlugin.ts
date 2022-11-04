@@ -19,7 +19,6 @@ export default (api: PluginAPI) => {
       // type 是 -generate xxx  yyy 第一个参数
       // 比如 pan g page 中的 page
       const [type] = args._
-      console.log(type, 'type')
 
       const runGenerator = async (generator: IGenerator) => {
         await generator?.fn({

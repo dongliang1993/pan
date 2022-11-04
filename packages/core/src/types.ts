@@ -3,3 +3,8 @@ export enum Env {
   production = 'production',
   test = 'test',
 }
+
+export enum PluginType {
+  preset = 'preset',
+  plugin = 'plugin',
+}

@@ -7,7 +7,7 @@ import { Plugin } from './plugin'
 import { Generator } from './generator'
 import { Command } from './command'
 
-import { Env } from '../types'
+import { Env, PluginType } from '../types'
 
 interface ServiceOpts {
   cwd: string
@@ -51,24 +51,26 @@ export class Service {
 
     let ret = await opts.plugin.apply?.()(pluginAPI)
 
-    // if (ret?.presets) {
-    //   ret.presets = ret.presets.map(
-    //     (preset: string) =>
-    //       new Plugin({
-    //         path: preset,
-    //         cwd: this.cwd,
-    //       })
-    //   )
-    // }
-    // if (ret?.plugins) {
-    //   ret.plugins = ret.plugins.map(
-    //     (plugin: string) =>
-    //       new Plugin({
-    //         path: plugin,
-    //         cwd: this.cwd,
-    //       })
-    //   )
-    // }
+    if (ret?.presets) {
+      ret.presets = ret.presets.map(
+        (preset: string) =>
+          new Plugin({
+            path: preset,
+            type: PluginType.preset,
+            cwd: this.cwd,
+          })
+      )
+    }
+    if (ret?.plugins) {
+      ret.plugins = ret.plugins.map(
+        (plugin: string) =>
+          new Plugin({
+            path: plugin,
+            type: PluginType.plugin,
+            cwd: this.cwd,
+          })
+      )
+    }
     return ret || {}
   }
 
@@ -109,7 +111,7 @@ export class Service {
     this.initPkgInfo()
 
     // 加载内部和传入的 presets and plugins
-    const { plugins } = Plugin.getPluginsAndPresets({
+    const { plugins, presets } = Plugin.getPluginsAndPresets({
       cwd: this.cwd,
       pkg: this.pkg,
       plugins: [require.resolve('./generatePlugin')].concat(
@@ -118,6 +120,17 @@ export class Service {
       presets: this.opts.presets,
     })
 
+    // 注册的 presets
+    const presetPlugins: Plugin[] = []
+    while (presets.length) {
+      await this.initPreset({
+        preset: presets.shift()!,
+        presets,
+        plugins: presetPlugins,
+      })
+    }
+
+    plugins.unshift(...presetPlugins)
     // 注册内置的 plugins
     while (plugins.length) {
       await this.initPlugin({ plugin: plugins.shift()! })

@@ -24,7 +24,7 @@
       "args": [
         "${workspaceRoot}/packages/pan/bin/pan.js",
         "g",
-        "eslint"
+        "prettier"
       ],
       // "env": {
       //   "TS_NODE_PROJECT": "${workspaceFolder}/packages/pan/tsconfig.json"

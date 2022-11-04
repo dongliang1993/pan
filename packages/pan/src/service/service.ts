@@ -6,6 +6,7 @@ export class Service extends CoreService {
 
     super({
       ...opts,
+      presets: [require.resolve('@pan/preset-pan'), ...(opts?.presets || [])],
       env: process.env.NODE_ENV,
       cwd,
     })
