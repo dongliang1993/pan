@@ -23,8 +23,8 @@
       ],
       "args": [
         "${workspaceRoot}/packages/pan/bin/pan.js",
-        "g",
-        "prettier"
+        "plugin",
+        "list"
       ],
       // "env": {
       //   "TS_NODE_PROJECT": "${workspaceFolder}/packages/pan/tsconfig.json"

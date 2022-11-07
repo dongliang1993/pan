@@ -25,6 +25,7 @@ export class Service {
   env: Env
   commands: Record<string, Command> = {}
   generators: Record<string, Generator> = {}
+  plugins: Record<string, Plugin> = {}
 
   pkg: {
     name?: string
@@ -41,11 +42,21 @@ export class Service {
     this.opts = opts
     this.commands = {}
     this.generators = {}
+    this.plugins = {}
 
     assert(existsSync(this.cwd), `Invalid cwd ${this.cwd}, it's not found.`)
   }
 
   async initPlugin(opts: { plugin: Plugin }) {
+    // register to this.plugins
+    assert(
+      !this.plugins[opts.plugin.id],
+      `${opts.plugin.type} ${opts.plugin.id} is already registered by ${
+        this.plugins[opts.plugin.id]?.path
+      }, ${opts.plugin.type} from ${opts.plugin.path} register failed.`
+    )
+    this.plugins[opts.plugin.id] = opts.plugin
+
     // apply with PluginAPI
     const pluginAPI = new PluginAPI({
       service: this,
@@ -54,8 +65,6 @@ export class Service {
 
     let ret = await opts.plugin.apply?.()(pluginAPI)
 
-    // preset 也是一种 plugin ，只不过它内部返回了形如 {presets: [], plugins: []}
-    // 这样的数据结构
     if (ret?.presets) {
       ret.presets = ret.presets.map(
         (preset: string) =>
@@ -96,8 +105,8 @@ export class Service {
     let pkg: Record<string, string | Record<string, any>> = {}
     let pkgPath: string = ''
     try {
+      pkg = require(join(this.cwd, 'package.json'))
       pkgPath = join(this.cwd, 'package.json')
-      pkg = require(pkgPath)
     } catch (_e) {}
     this.pkg = pkg
     this.pkgPath = pkgPath || join(this.cwd, 'package.json')
@@ -106,13 +115,14 @@ export class Service {
   async run(opts: { name: string; args?: any }) {
     const { name, args = {} } = opts
     args._ = args._ || []
-    // args._[0] 一般就是 name
-    // 所以这里先处理一下命令行的参数
+    // 先处理一下命令行的参数
+    // name 就是从 args._ 里面拿到的，所以
+    // shift the command itself
     if (args._[0] === name) {
       args._.shift()
     }
 
-    // 获取 package.json 相关信息
+    // get pkg from package.json
     this.initPkgInfo()
 
     // 加载内部和传入的 presets and plugins

@@ -16,7 +16,7 @@ export class Plugin {
   type: PluginType
   path: string
   apply?: Function
-  // id: string;
+  id: string
 
   constructor(opts: PluginOpts) {
     this.type = opts.type
@@ -24,6 +24,10 @@ export class Plugin {
     this.cwd = opts.cwd
 
     assert(existsSync(this.path), `Invalid ${this.path}, it's not exists.`)
+
+    // path is the package entry
+    let isPkgEntry = false
+    this.id = this.getId({ isPkgEntry })
 
     this.apply = () => {
       let ret
@@ -36,6 +40,24 @@ export class Plugin {
       // use the default member for es modules
       return ret.__esModule ? ret.default : ret
     }
+  }
+
+  getId(opts: { isPkgEntry: boolean }) {
+    let id = winPath(this.path)
+    // if (opts.isPkgEntry) {
+    //   id = opts.pkg!.name
+    // } else if (winPath(this.path).startsWith(winPath(this.cwd))) {
+    //   id = `./${winPath(relative(this.cwd, this.path))}`
+    // } else if (opts.pkgJSONPath) {
+    //   id = winPath(
+    //     join(opts.pkg!.name, relative(dirname(opts.pkgJSONPath), this.path))
+    //   )
+    // } else {
+    //   id = winPath(this.path)
+    // }
+    id = id.replace('@pan/preset-pan/lib/plugins', '@@')
+    id = id.replace(/\.js$/, '')
+    return id
   }
 
   /**
