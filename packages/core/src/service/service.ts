@@ -63,7 +63,26 @@ export class Service {
       plugin: opts.plugin,
     })
 
-    let ret = await opts.plugin.apply?.()(pluginAPI)
+    const proxyPluginAPI = PluginAPI.addProxyAPI({
+      service: this,
+      pluginAPI,
+      serviceProps: [
+        'appData',
+        'applyPlugins',
+        'args',
+        'config',
+        'cwd',
+        'pkg',
+        'pkgPath',
+        'name',
+        'paths',
+        'userConfig',
+        'env',
+        'isPluginEnable',
+      ],
+    })
+
+    let ret = await opts.plugin.apply?.()(proxyPluginAPI)
 
     if (ret?.presets) {
       ret.presets = ret.presets.map(
@@ -158,4 +177,38 @@ export class Service {
     const ret = await command.fn({ args })
     return ret
   }
+}
+
+export interface IServicePluginAPI {
+  // appData: typeof Service.prototype.appData
+  // applyPlugins: typeof Service.prototype.applyPlugins
+  // args: typeof Service.prototype.args
+  // config: typeof Service.prototype.config
+  cwd: typeof Service.prototype.cwd
+  generators: typeof Service.prototype.generators
+  pkg: typeof Service.prototype.pkg
+  pkgPath: typeof Service.prototype.pkgPath
+  // name: typeof Service.prototype.name
+  // paths: Required<typeof Service.prototype.paths>
+  // userConfig: typeof Service.prototype.userConfig
+  env: typeof Service.prototype.env
+  // isPluginEnable: typeof Service.prototype.isPluginEnable
+
+  // onCheck: IEvent<null>
+  // onStart: IEvent<null>
+  // modifyAppData: IModify<typeof Service.prototype.appData, null>
+  // modifyConfig: IModify<
+  //   typeof Service.prototype.config,
+  //   { paths: Record<string, string> }
+  // >
+  // modifyDefaultConfig: IModify<typeof Service.prototype.config, null>
+  // modifyPaths: IModify<typeof Service.prototype.paths, null>
+
+  // ApplyPluginsType: typeof ApplyPluginsType
+  // ConfigChangeType: typeof ConfigChangeType
+  // EnableBy: typeof EnableBy
+  // ServiceStage: typeof ServiceStage
+
+  registerPresets: (presets: any[]) => void
+  registerPlugins: (plugins: (Plugin | {})[]) => void
 }

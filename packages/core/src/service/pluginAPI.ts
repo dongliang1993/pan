@@ -88,4 +88,24 @@ export class PluginAPI {
       })
     }
   }
+
+  static addProxyAPI(opts: {
+    pluginAPI: PluginAPI
+    service: Service
+    serviceProps: string[]
+  }) {
+    return new Proxy(opts.pluginAPI, {
+      get: (target, prop: string) => {
+        if (opts.serviceProps.includes(prop)) {
+          // @ts-ignore
+          const serviceProp = opts.service[prop]
+          return typeof serviceProp === 'function'
+            ? serviceProp.bind(opts.service)
+            : serviceProp
+        }
+        // @ts-ignore
+        return target[prop]
+      },
+    })
+  }
 }

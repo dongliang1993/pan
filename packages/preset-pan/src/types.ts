@@ -1,3 +1,3 @@
-import type { PluginAPI } from '@pan/core'
+import type { PluginAPI, IServicePluginAPI } from '@pan/core'
 
-export type IApi = PluginAPI
+export type IApi = PluginAPI & IServicePluginAPI
